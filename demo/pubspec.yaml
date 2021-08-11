@@ -19,7 +19,7 @@ version: 1.0.0+1
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
-
+# 生产环境
 dependencies:
   flutter:
     sdk: flutter
@@ -28,7 +28,10 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-
+  #使用国人开发请求工具dio，https://github.com/flutterchina/dio/blob/master/README-ZH.md
+  #请求插件,版本不同，可能会有坑
+  dio: ^4.0.0  
+# 开发插件,上线不会被打包进去的。
 dev_dependencies:
   flutter_test:
     sdk: flutter
