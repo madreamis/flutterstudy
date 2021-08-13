@@ -4,16 +4,11 @@ import 'dart:io';
 import '../config/serviceUrl.dart';
 
 // 首页主题内容
-Future getHomePageContent() async {
+Future getHomePageContent(formData) async {
   try {
     print('qing');
     Response response;
     Dio dio = new Dio();
-    var formData = {
-      "pageNum": 1,
-      "pageSize": 10,
-      "colorType": 0,
-    };
     print(servicePath);
     response = await dio.get(servicePath, queryParameters: formData);
     if (response.statusCode == 200) {
