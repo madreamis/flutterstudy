@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:demo/pages/tabs/ListBox.dart';
 import 'package:flutter/material.dart';
 // 引入dio库
 import 'package:dio/dio.dart';
@@ -18,41 +19,46 @@ class _CatrgoryPageState extends State<CatrgoryPage>
   // ignore: unused_field
   late TabController _tabController;
   var list = ["全部", "黑", "白"];
+  // var list = [
+  //   {"name": "全部", "type": 0},
+  //   {"name": "黑", "type": 1},
+  //   {"name": "白", "type": 2}
+  // ];
   var a;
   var b;
   @override
   void initState() {
     // 调用\
-    var formData = {
-      "pageNum": 1,
-      "pageSize": 10,
-      "colorType": 0,
-    };
-    getHomePageContent(formData).then((val) {
-      setState(() {
-        this.a = val.toString();
-        print(a);
-      });
-    });
+    // var formData = {
+    //   "pageNum": 1,
+    //   "pageSize": 10,
+    //   "colorType": 0,
+    // };
+    // getHomePageContent(formData).then((val) {
+    //   setState(() {
+    //     this.a = val.toString();
+    //     print(a);
+    //   });
+    // });
     super.initState();
     _tabController = new TabController(vsync: this, length: this.list.length);
     _tabController.addListener(() {
       // print(this._tabController.toString());
       if (_tabController.index == _tabController.animation!.value) {
         // 点击切换tab的时候执行了一个动画效果，滑动切换的时候是没有的，在这个过程中触发了一次Listener,所以触发了两次addListener方法,我们只需要addListener方法中加入一个判断_tabController.addListener(() {
-        var formData = {
-          "pageNum": 1,
-          "pageSize": 10,
-          "colorType": 0,
-        };
-        formData["colorType"] = _tabController.index;
-        getHomePageContent(formData).then((value) {
-          setState(() {
-            this.b = value.toString();
-            print(b);
-          });
-        });
-        print(_tabController.index);
+        // var formData = {
+        //   "pageNum": 1,
+        //   "pageSize": 10,
+        //   "colorType": 0,
+        // };
+        // formData["colorType"] = _tabController.index;
+        // getHomePageContent(formData).then((value) {
+        //   setState(() {
+        //     this.b = value.toString();
+        //     print(b);
+        //   });
+        // });
+        // print(_tabController.index);
       }
     });
   }
@@ -144,20 +150,5 @@ class _CatrgoryPageState extends State<CatrgoryPage>
 //     );
 //   }
 // }
-class ListBox extends StatefulWidget {
-  final String name;
-  const ListBox({
-    Key? key,
-    required this.name,
-  }) : super(key: key);
+// 有状态组件
 
-  @override
-  _ListBoxState createState() => _ListBoxState();
-}
-
-class _ListBoxState extends State<ListBox> {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
