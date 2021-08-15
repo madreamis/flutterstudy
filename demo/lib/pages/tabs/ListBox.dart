@@ -15,6 +15,7 @@ class ListBox extends StatefulWidget {
 class _ListBoxState extends State<ListBox> {
   var a;
   var type;
+  final List listMay = [];
   @override
   // 请求实例
   void initState() {
@@ -37,9 +38,11 @@ class _ListBoxState extends State<ListBox> {
     formData["colorType"] = this.type;
     getHomePageContent(formData).then((val) {
       setState(() {
-        this.a = val.toString();
-        print(a);
+        // this.a = val.toString();
+        listMay.addAll(val);
+        // print(a);
       });
+      print(listMay);
     });
   }
 
