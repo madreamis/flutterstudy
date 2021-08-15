@@ -1,8 +1,9 @@
-import 'dart:math';
+// import 'dart:ffi';
+// import 'dart:math';
 
 import 'package:flutter/material.dart';
 // 引入dio库
-import 'package:dio/dio.dart';
+// import 'package:dio/dio.dart';
 // 封装请求
 import '../../service/serviceMethod.dart';
 
@@ -144,6 +145,7 @@ class _CatrgoryPageState extends State<CatrgoryPage>
 //     );
 //   }
 // }
+// 接受不同type组件
 class ListBox extends StatefulWidget {
   final String name;
   const ListBox({
@@ -158,6 +160,18 @@ class ListBox extends StatefulWidget {
 class _ListBoxState extends State<ListBox> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      body: RefreshIndicator(
+        child: ListView(
+          children: [],
+        ),
+        onRefresh: _my,
+      ),
+    );
+  }
+
+  Future<Null> _my() async {
+    await Future.delayed(Duration(microseconds: 100));
+    print("222");
   }
 }
