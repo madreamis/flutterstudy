@@ -1,5 +1,10 @@
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:demo/widgets/loading_container.dart';
 import 'package:flutter/material.dart';
 import '../../service/serviceMethod.dart';
+import '../../model/fiveListf.dart';
 
 class ListBox extends StatefulWidget {
   const ListBox({
@@ -15,9 +20,27 @@ class ListBox extends StatefulWidget {
 class _ListBoxState extends State<ListBox> {
   var a;
   var type;
-  final List listMay = [];
+  List listMay = [];
+  // ignore: unused_field
+  bool _loading = false;
+
+  get index => null;
+
+  get list => null;
   @override
   // 请求实例
+  // // 请求实例
+  // void getList() async {
+  //   try {
+  //     Response response;
+  //     response = await Dio().get(
+  //         "http://124.70.33.245:8080/fiveColorRoster/getList",
+  //         queryParameters: {"colorType": 0, "pageNum": 1, "pageSize": 10});
+  //     print(response);
+  //   } catch (err) {
+  //     print(err);
+  //   }
+  // }
   void initState() {
     print(widget.name);
     this.type = widget.name;
@@ -36,19 +59,58 @@ class _ListBoxState extends State<ListBox> {
       "colorType": 0,
     };
     formData["colorType"] = this.type;
+    print(formData);
     getHomePageContent(formData).then((val) {
+      // ignore: unused_local_variable
+      // print(val);
+      // var data1 = json.decode(val['data'].toString());
+      // print(val);
+      fiveModel list2 = fiveModel.fromJson(val['data']);
+      print(list2.list);
+      // list2.list.forEach((item) => print(item.id));
+      // final result = json.decode(val['data']);
+      // print(result);
+      // print(val['data']);
+      // print(val);
+      // // Map<String, dynamic> user = jsonDecode(val);
+      // var b = fiveModel.fromJson(val);
+      // print(b);
       setState(() {
-        // this.a = val.toString();
-        listMay.addAll(val);
+        // listMay = list2.list;
+        // list2.list.forEach((item) =>
+        //     //  print(item.id),
+        //     listMay.add(item));
+        // this.a = val;
+        // listMay.add(list2.data);
         // print(a);
       });
       print(listMay);
     });
   }
 
+  Future _handleRefresh() async {
+    print('shauixn');
+  }
+
   Widget build(BuildContext context) {
-    return Container(
-      child: Text(widget.name),
+    return Scaffold(
+      body: LoadingContainer(
+        isLoading: _loading,
+        child: RefreshIndicator(
+          onRefresh: _handleRefresh,
+          child: MediaQuery.removePadding(
+              context: context,
+              child: ListView.builder(
+                itemBuilder: (context, index) {
+                  return Container(
+                    child: Text(listMay[index]),
+                  );
+                },
+                itemExtent: 50,
+                itemCount: listMay.length,
+              )),
+        ),
+      ),
     );
   }
 }

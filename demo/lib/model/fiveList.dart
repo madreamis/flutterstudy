@@ -1,4 +1,7 @@
 // ignore: camel_case_types
+// import 'dart:convert';
+
+// ignore: camel_case_types
 class fiveModel {
   late final int total;
   late final int pages;
@@ -28,7 +31,7 @@ class Comment {
   Comment.fromMap(Map<String, dynamic> json) {
     this.id = json['id'];
     this.userId = json['userId'];
-    this.userName = json['use'];
+    this.userName = json['userName'];
     this.colorType = json['colorType'];
     this.addTime = json['addTime'];
     this.updateTime = json['updateTime'];
