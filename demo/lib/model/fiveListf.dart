@@ -4,7 +4,7 @@ class fiveModel {
   final int pages;
   final int limit;
   final int page;
-  List list;
+  List<Comment> list;
   fiveModel({
     required this.total,
     required this.pages,

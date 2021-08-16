@@ -24,9 +24,7 @@ class _ListBoxState extends State<ListBox> {
   // ignore: unused_field
   bool _loading = false;
 
-  get index => null;
-
-  get list => null;
+  var data = [];
   @override
   // 请求实例
   // // 请求实例
@@ -65,8 +63,15 @@ class _ListBoxState extends State<ListBox> {
       // print(val);
       // var data1 = json.decode(val['data'].toString());
       // print(val);
-      fiveModel list2 = fiveModel.fromJson(val['data']);
-      print(list2.list);
+      // fiveModel list2 = fiveModel.fromJson(val['data']);
+      // print(list2.list);
+      // final dataList = val['data']['list'];
+      // print(dataList);
+      // List<Comment> artList = [];
+      // for (var article in dataList) {
+      //   artList.add(Comment.fromJson(article));
+      // }
+      // print(artList);
       // list2.list.forEach((item) => print(item.id));
       // final result = json.decode(val['data']);
       // print(result);
@@ -76,15 +81,25 @@ class _ListBoxState extends State<ListBox> {
       // var b = fiveModel.fromJson(val);
       // print(b);
       setState(() {
+        print(val);
+        this.data.add(val['data']['list']);
         // listMay = list2.list;
         // list2.list.forEach((item) =>
         //     //  print(item.id),
-        //     listMay.add(item));
+        // listMay.add({
+        //   "id": item.id.toString(),
+        //   "userId": item.userId,
+        //   "userName": item.userName,
+        //   "colorType": item.colorType,
+        //   "addTime": item.addTime,
+        //   "updateTime": item.updateTime,
+        //   "deleted": item.deleted,
+        // }));
         // this.a = val;
         // listMay.add(list2.data);
         // print(a);
       });
-      print(listMay);
+      // print(this.data[0]['id']);
     });
   }
 
@@ -102,9 +117,7 @@ class _ListBoxState extends State<ListBox> {
               context: context,
               child: ListView.builder(
                 itemBuilder: (context, index) {
-                  return Container(
-                    child: Text(listMay[index]),
-                  );
+                  return Container();
                 },
                 itemExtent: 50,
                 itemCount: listMay.length,
