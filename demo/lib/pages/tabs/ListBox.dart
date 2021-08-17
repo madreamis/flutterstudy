@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+// import 'package:demo/model/fiveList.dart';
 import 'package:demo/widgets/loading_container.dart';
 import 'package:flutter/material.dart';
 import '../../service/serviceMethod.dart';
@@ -20,7 +21,7 @@ class ListBox extends StatefulWidget {
 class _ListBoxState extends State<ListBox> {
   var a;
   var type;
-  List listMay = [];
+  List<Comment> listMay = [];
   // ignore: unused_field
   bool _loading = false;
 
@@ -61,12 +62,15 @@ class _ListBoxState extends State<ListBox> {
     formData["colorType"] = this.type;
     print(formData);
     getHomePageContent(formData).then((val) {
-      // ignore: unused_local_variable
-      // print(val);
+      print(val);
+      // Map user = json.decode(val['data']);
+      var useArr = new fiveModel.fromJson(val['data']); //转化为obj.取值的模型
+      print(useArr);
+
       // var data1 = json.decode(val['data'].toString());
       // print(val);
-      fiveModel list2 = fiveModel.fromJson(val['data']);
-      print(list2.list);
+      // fiveModel list2 = fiveModel.fromJson(val['data']);
+      // print(list2.list);
       // list2.list.forEach((item) => print(item.id));
       // final result = json.decode(val['data']);
       // print(result);
@@ -76,6 +80,7 @@ class _ListBoxState extends State<ListBox> {
       // var b = fiveModel.fromJson(val);
       // print(b);
       setState(() {
+        listMay.addAll(useArr.list);
         // listMay = list2.list;
         // list2.list.forEach((item) =>
         //     //  print(item.id),
@@ -103,7 +108,9 @@ class _ListBoxState extends State<ListBox> {
               child: ListView.builder(
                 itemBuilder: (context, index) {
                   return Container(
-                    child: Text(listMay[index]),
+                    child: Text(
+                      listMay[index].userName.toString(),
+                    ),
                   );
                 },
                 itemExtent: 50,
