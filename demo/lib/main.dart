@@ -1,3 +1,4 @@
+import 'package:demo/pages/start/Start.dart';
 import 'package:flutter/material.dart';
 import 'pages/tabs/Tabs.dart';
 import 'pages/tabs/Search.dart';
@@ -9,7 +10,8 @@ void main() {
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   final routes = {
-    "/": (context) => Tabs(),
+    '/': (context) => StartPage(),
+    "/tabs": (context) => Tabs(),
     '/search': (context, {arguments}) => searchPage(arguments: arguments)
   };
   @override
