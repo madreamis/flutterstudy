@@ -25,9 +25,7 @@ class _ListBoxState extends State<ListBox> {
   // ignore: unused_field
   bool _loading = false;
 
-  get index => null;
-
-  get list => null;
+  var data = [];
   @override
   // 请求实例
   // // 请求实例
@@ -84,12 +82,20 @@ class _ListBoxState extends State<ListBox> {
         // listMay = list2.list;
         // list2.list.forEach((item) =>
         //     //  print(item.id),
-        //     listMay.add(item));
+        // listMay.add({
+        //   "id": item.id.toString(),
+        //   "userId": item.userId,
+        //   "userName": item.userName,
+        //   "colorType": item.colorType,
+        //   "addTime": item.addTime,
+        //   "updateTime": item.updateTime,
+        //   "deleted": item.deleted,
+        // }));
         // this.a = val;
         // listMay.add(list2.data);
         // print(a);
       });
-      print(listMay);
+      // print(this.data[0]['id']);
     });
   }
 
