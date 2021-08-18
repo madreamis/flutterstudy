@@ -61,41 +61,11 @@ class _ListBoxState extends State<ListBox> {
     print(formData);
     getHomePageContent(formData).then((val) {
       print(val);
-      // Map user = json.decode(val['data']);
       var useArr = new fiveModel.fromJson(val['data']); //转化为obj.取值的模型
       print(useArr);
-
-      // var data1 = json.decode(val['data'].toString());
-      // print(val);
-      // fiveModel list2 = fiveModel.fromJson(val['data']);
-      // print(list2.list);
-      // list2.list.forEach((item) => print(item.id));
-      // final result = json.decode(val['data']);
-      // print(result);
-      // print(val['data']);
-      // print(val);
-      // // Map<String, dynamic> user = jsonDecode(val);
-      // var b = fiveModel.fromJson(val);
-      // print(b);
       setState(() {
         listMay.addAll(useArr.list);
-        // listMay = list2.list;
-        // list2.list.forEach((item) =>
-        //     //  print(item.id),
-        // listMay.add({
-        //   "id": item.id.toString(),
-        //   "userId": item.userId,
-        //   "userName": item.userName,
-        //   "colorType": item.colorType,
-        //   "addTime": item.addTime,
-        //   "updateTime": item.updateTime,
-        //   "deleted": item.deleted,
-        // }));
-        // this.a = val;
-        // listMay.add(list2.data);
-        // print(a);
       });
-      // print(this.data[0]['id']);
     });
   }
 

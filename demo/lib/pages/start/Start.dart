@@ -1,6 +1,7 @@
+// 项目启动页的配置信息
 import 'dart:async';
-
-import 'package:demo/pages/tabs/Tabs.dart';
+import 'package:demo/pages/login/Login.dart';
+// import 'package:demo/pages/tabs/Tabs.dart';
 import 'package:flutter/material.dart';
 
 class StartPage extends StatefulWidget {
@@ -28,16 +29,18 @@ class _StartPageState extends State<StartPage> {
     });
   }
 
+// 跳转函数的配置
   void _jumpRootPage() {
     _timer.cancel();
+    // 跳转并关闭当前页面，并且无法返回当前页面。
     Navigator.pushAndRemoveUntil(context,
         MaterialPageRoute(builder: (BuildContext context) {
-      return Tabs();
+      return LoginPage();
     }), (route) => false);
   }
 
   Widget build(BuildContext context) {
-    var name = 'assets/images/1.jpg';
+    var name = 'assets/images/3.jpg';
     return Scaffold(
       body: Stack(
         children: [
