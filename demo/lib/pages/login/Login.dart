@@ -30,8 +30,10 @@ class _LoginPageState extends State<LoginPage> {
         "password": '',
         "phonenum": '',
       };
-      formData['password'] = _password;
-      formData['phonenum'] = _user;
+      formData['password'] = '222';
+      formData['phonenum'] = '13843854382';
+      // formData['password'] = _password;
+      // formData['phonenum'] = _user;
       print(formData);
       getLogin(formData).then((value) => {
             print("object"),
