@@ -2,8 +2,11 @@
 
 import 'package:demo/pages/tabs/Tabs.dart';
 import 'package:demo/service/serviceMethod.dart';
+import 'package:demo/utils/store.dart';
 import 'package:demo/widgets/BarWidget.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../../utils/store.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -20,27 +23,44 @@ class _LoginPageState extends State<LoginPage> {
   var _password = '';
   var _scaffoldkey = GlobalKey<ScaffoldState>();
   final _formKey = GlobalKey<FormState>();
+  Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+
+  late String username;
+
   @override
   // ignore: override_on_non_overriding_member
   void login() async {
+    final SharedPreferences prefs = await _prefs;
+    Store store = await Store.getInstance();
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
       print('$_user,$_password');
-      var formData = {
-        "password": '',
-        "phonenum": '',
-      };
-      formData['password'] = '222';
-      formData['phonenum'] = '13843854382';
+      // 第一种方式
+
+      // var formData = {
+      //   "password": '',
+      //   "phonenum": '',
+      // };
+      // formData['password'] = '222';
+      // formData['phonenum'] = '13843854382';
       // formData['password'] = _password;
       // formData['phonenum'] = _user;
+      // 第二种方式
+      Map<String, dynamic> formData = {
+        'password': '222',
+        'phonenum': '13843854382'
+      };
       print(formData);
-      getLogin(formData).then((value) => {
-            print("object"),
-            print(value),
+      getLogin(formData).then((value) async => {
+            // print(value);
+            username = value['data']['userName'],
+            print(username),
             if (value['flag'] == true)
               {
-                print("chengg"),
+                // 登陆成功,存取字段在本地
+                await store.setString(StoreKeys.token, username),
+                // prefs.setString("username", username),
+                print(store),
                 Navigator.pushAndRemoveUntil(context,
                     MaterialPageRoute(builder: (BuildContext context) {
                   return Tabs();

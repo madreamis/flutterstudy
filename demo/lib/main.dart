@@ -1,7 +1,9 @@
 import 'package:demo/pages/start/Start.dart';
 import 'package:flutter/material.dart';
+import 'package:scoped_model/scoped_model.dart';
 import 'pages/tabs/Tabs.dart';
 import 'pages/tabs/Search.dart';
+import 'utils/AuthModel.dart';
 
 void main() {
   runApp(MyApp());
@@ -16,34 +18,37 @@ class MyApp extends StatelessWidget {
   };
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false, //取消debug模式
-      // home: Tabs(),
-      // 命名路由定义在根组件当中
-      // routes: {
-      //   // '/search': (context) => searchPage(),
-      //       ExtractArgumentsScreen.routeName: (context) =>
-      //       const ExtractArgumentsScreen(),
-      // },
-      initialRoute: "/",
-      onGenerateRoute: (RouteSettings settings) {
-        //统一处理
-        final String? name = settings.name;
-        final Function pageContentBuilder = this.routes[name] as Function;
-        if (pageContentBuilder != null) {
-          if (settings.arguments != null) {
-            final Route route = MaterialPageRoute(
-                builder: (context) =>
-                    pageContentBuilder(context, arguments: settings.arguments));
-            return route;
-          } else {
-            final Route route = MaterialPageRoute(
-                builder: (context) => pageContentBuilder(context));
-            return route;
-          }
-        }
-      },
-    );
+    return ScopedModel<AuthModel>(
+        model: AuthModel(),
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false, //取消debug模式
+          // home: Tabs(),
+          // 命名路由定义在根组件当中
+          // routes: {
+          //   // '/search': (context) => searchPage(),
+          //       ExtractArgumentsScreen.routeName: (context) =>
+          //       const ExtractArgumentsScreen(),
+          // },
+          initialRoute: "/",
+          onGenerateRoute: (RouteSettings settings) {
+            //统一处理
+            final String? name = settings.name;
+            final Function pageContentBuilder = this.routes[name] as Function;
+            // ignore: unnecessary_null_comparison
+            if (pageContentBuilder != null) {
+              if (settings.arguments != null) {
+                final Route route = MaterialPageRoute(
+                    builder: (context) => pageContentBuilder(context,
+                        arguments: settings.arguments));
+                return route;
+              } else {
+                final Route route = MaterialPageRoute(
+                    builder: (context) => pageContentBuilder(context));
+                return route;
+              }
+            }
+          },
+        ));
   }
 }
 

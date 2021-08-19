@@ -16,7 +16,6 @@ Future getHomePageContent(formData) async {
     response = await dio.get(servicePath, queryParameters: formData);
     if (response.statusCode == 200) {
       return response.data;
-      // return fivemodel;
     } else {
       throw Exception('接口异常');
     }
@@ -28,16 +27,13 @@ Future getHomePageContent(formData) async {
 // 登录
 Future getLogin(formData) async {
   try {
-    // print('登录');
     Response response;
     Dio dio = new Dio();
-    // print(loginUrl);
     response = await dio.get(loginUrl, queryParameters: formData);
     print('登录');
     print(response);
     if (response.statusCode == 200) {
       return response.data;
-      // return fivemodel;
     } else {
       throw Exception('接口异常');
     }

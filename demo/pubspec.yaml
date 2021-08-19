@@ -34,6 +34,8 @@ dependencies:
   # 为简单数据包装特定于平台的持久存储（iOS 和 macOS 上的 NSUserDefaults，Android 上的 SharedPreferences 等）。
   # 数据可能会异步持久化到磁盘，并不能保证写入返回后会持久化到磁盘，因此该插件不得用于存储关键数据。
   shared_preferences: ^2.0.6
+  # 一组实用程序，可让您轻松地将数据模型从父 Widget 传递到其后代
+  scoped_model: ^2.0.0-nullsafety.0
 # 开发插件,上线不会被打包进去的。
 dev_dependencies:
   flutter_test:

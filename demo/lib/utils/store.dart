@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 enum StoreKeys {
   //枚举
   token,
+  username,
 }
 
 class Store {
@@ -16,7 +17,7 @@ class Store {
   Store._internal(this._store);
 
   getString(StoreKeys key) async {
-    return _store.get(key.toString());
+    return _store.getString(key.toString());
   }
 
   setString(StoreKeys key, String value) async {
